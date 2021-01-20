@@ -16,6 +16,7 @@
 \usepackage{array}
 \usepackage{subcaption}
 \usepackage{bbold}
+\usepackage{pdfpages}
 %\usepackage{subfig}
 \clubpenalty10000
 \widowpenalty10000
@@ -27,37 +28,31 @@
 	\begin{center}
 		
 		\huge
-		\textbf{Machine Learning I - Report: Exercise Sheet 1}
-		
+		\textbf{Machine Learning I - Sheet 1} 
 	\end{center}
-	
-	%\begin{figure}[h]
-	%\centering
-	%\includegraphics[width=3.25in]{UniRegensburgLogo}
-	%\end{figure}
+
+
+	\begin{center}
+		\Large
+		\text{20.01.2020}
+	\end{center}
 	
 	
 	\begin{center}
-		\LARGE
-		\textbf{Johannes Groß}
-		
-		\textbf{Leonard Bleiziffer}	
-		
+		\large
+		\text{Johannes Groß, 2036852, BSc Physik}\\
+		\text{Leonard Bleiziffer, 2038588, BSc Physik}	
+	
 	\end{center}
-	\vspace{5cm}
-	\begin{center}
-		\LARGE		
-		\textbf{15.01.2020}
-		
-	\end{center}
+
 	\thispagestyle{empty}
 %	\tableofcontents 
 	\thispagestyle{empty}
 	
-	\vspace{4cm}
+	\vspace{0cm}
 	
 	{\let\clearpage\relax \chapter{Maximum Likelihood}}
-	The Maximum Likelihood (ML) estimates for mean and covariance is found for different data sets. In the second part of this task, ML estimates are used to perform a classification.
+	The Maximum Likelihood (ML) estimates for mean and covariance is found for different data sets. In the second part of this task, ML estimates are used to perform a simple classification.
 	
 	\section{ML Estimates}
 	The Gaussian distribution with mean $\mu  = [2,-2]^T$ and covariance $c = \big(\begin{smallmatrix}
@@ -94,7 +89,7 @@
 	\end{center}
 	\end{table}
 
-	While the estimates of the mean improve by two orders of magnitudes with respect to the l2-distance, the estimate of the covariance matrix improves by one order of magnitude with respect to the frobenius-distance, when increasing the number of samples from 50 to 5000:
+	While the estimates of the mean improve by two orders of magnitudes with respect to the l2-distance, the estimate of the covariance matrix improves by one order of magnitude with respect to the frobenius-distance, when increasing the number of samples by two orders of magnitude from 50 to 5000:
 	\begin{align*}
 		c_{50} = \begin{pmatrix}			
 					0.6539 & 0.1084\\
@@ -135,7 +130,7 @@
 	\end{center}
 	\end{figure}
 
-	It can be observed in the plots that the classes in the data generated with the diagonal covariance are more separated than in the non-diagonal case. This is also reflected in the ability of the ML-classifier to assign the samples to the correct class. The accuracy differs by $4\%$:
+	It can be observed in the plots that the classes in the data generated with the diagonal covariance are slightly more separated than in the non-diagonal case. This difference is also reflected in the ability of the ML-classifiers to assign the samples to the correct class. The accuracy differs by $4\%$:
 	
 	\begin{table}[H]
 	\begin{center}	
@@ -161,7 +156,7 @@
 	\section{Estimating Parameters}
 	600 samples were drawn from the a Gaussian mixture model with the following parameters: 
 	\begin{align*}
-		K = 3, \quad \mu_1 = [1,1]^T, \quad \mu_2 = [3,3]^T, \quad \mu_3 = [2,6]^T, \quad c_1 = 0.1 \cdot \mathbb{1},\\ \quad c_2 = 0.2 \cdot \mathbb{1}, \quad c_3 = 0.3 \cdot \mathbb{1}, \quad P_1 = 0.4, \quad P_2 = 0.4, \quad P_2 = 0.2
+		K = 3, \quad \mu_1 = [1,1]^T, \quad \mu_2 = [3,3]^T, \quad \mu_3 = [2,6]^T, \quad c_1 = 0.1 \cdot \mathbb{1},\\ \quad c_2 = 0.2 \cdot \mathbb{1}, \quad c_3 = 0.3 \cdot \mathbb{1}, \quad P_1 = 0.4, \quad P_2 = 0.4, \quad P_3 = 0.2
 	\end{align*}
 	This results in a distribution of samples shown below, where the mean estimates were determined with the EM algorithm using kmeans as the initialization method:
 	
@@ -171,7 +166,8 @@
 	\end{center}
 	\end{figure}
 
-	The following table shows the errors on the different parameters. For the weights and covariances, the error was calculated as the absolute difference between the true value and the estimate (covariance: factor before identity-matrix). The error on the means is given by the l2-distance. No significant differences were found between the three classes:
+	The following table shows the errors on the different parameters. For the weights and covariances, the error was calculated as the absolute difference between the true value and the estimate (covariance: factor before identity-matrix). The error on the means is given by the l2-distance. All parameters where estimated with a reasonable high precision and there were 
+	no significant differences between the three classes:
 	
 	\begin{table}[H]
 	\begin{center}	
@@ -186,7 +182,7 @@
 	\end{table}
 	
 	\section{Varying Initial Parameters}
-	Then, the performance of EM was tested by using two different sets of initial parameters and observing the results. The first set of parameters were:
+	Then, the performance of EM was tested by using two different sets of initial parameters and observing the results. The first set of parameters was:
 	\begin{align*}
 		K = 3, \quad \mu_1 = [0,2]^T, \quad \mu_2 = [5,2]^T, \quad \mu_3 = [5,5]^T, \\ c_1 = 0.15 \cdot \mathbb{1}, \quad c_2 = 0.27 \cdot \mathbb{1}, \quad c_3 = 0.4 \cdot \mathbb{1}, \quad P_1 = P_2 = P_3 = 0.33
 	\end{align*}
@@ -195,10 +191,8 @@
 	K = 2, \quad \mu_1 = [1.6,1.4]^T, \quad \mu_2 = [1.4,1.6]^T, \\ c_1 = 0.2 \cdot \mathbb{1}, \quad c_2 = 0.4 \cdot \mathbb{1}, \quad P_1 = P_2 = 0.5
 	\end{align*}	
 
-	Below, the results for the two sets of initial parameters are shown. With the first set of parameters, the algorithm converges to the correct results with similar errors as before with kmeans used as an initialization method. \\
-	Of course, EM had no chance to determine good estimates with the second set of initial parameters, as it tried to find estimates for two instead of three classes. However, the mean of class 1 was estimated quite precisely and the second mean was estimated to lie between classes 2 and 3. Furthermore, it is interesting to note that the estimated weights and covariances seem to indicate that classes 2 and 3 where taken to be one class by the EM algorithm. \\
-	After further experimentation with the initial parameters, the following can be summarized for the EM algorithm: if the number of classes is not set correctly initially, the results will deviate greatly from the exact parameters; the other initial parameters have to be roughly in the right ballpark, whilst the EM seems to be most sensitive to the initialization of the means. 
-
+	Below, the results for the two sets of initial parameters are shown. 
+	
 	\begin{figure}[H]
 		\begin{minipage}[b]{0.5\textwidth}
 			\includegraphics[width=\textwidth]{Task2_initparams_set1_png}
@@ -207,13 +201,15 @@
 			\includegraphics[width=\textwidth]{Task2_initparams_set2_png}
 		\end{minipage}
 	\end{figure}
+	With the first set of parameters, the algorithm converges to the correct results with similar errors as before with kmeans used as an initialization method. \\
+	Of course, EM had no chance to determine good estimates with the second set of initial parameters, as it tried to find estimates for two instead of three classes. However, the mean of class 1 was estimated quite precisely and the second mean was estimated to lie between classes 2 and 3. Furthermore, it is interesting to note that the estimated weights and covariances seem to indicate that classes 2 and 3 where taken to be one class by the EM algorithm. \\
+	After further experimentation with the initial parameters, the following can be summarized for the EM algorithm: if the number of classes is not set correctly initially, the results will deviate greatly from the exact parameters; the other initial parameters have to be roughly in the right ballpark, whilst the EM seems to be most sensitive to the initialization of the means. 
 
-	\vspace{3cm}
 	
 
 	{\let\clearpage\relax \chapter{Clustering}}
 	
-	A data set $Train$ was created, that consists $N = 1000$ samples grouped into four equally sized classes. Each class is described by a Gaussian distribution with the following parameters:
+	A data set $Train$ was created that contains $N = 1000$ samples, grouped into four equally sized classes. Each class is described by a Gaussian distribution with the following parameters:
 	\begin{align*}
 		\mu_1 = [0,0]^T, \quad \mu_2 = [10,0]^T, \quad \mu_3 = [0,6]^T, \quad \mu_4 = [9,8]^T, \\
 		c_1 = \mathbb{1}, \quad 
@@ -231,24 +227,25 @@
 		\end{pmatrix}
 	\end{align*}
 
-	Now the K-means algorithm is applied to $Train$ with different initial parameters. First, only the number of initialized classes was varied. Obviously, the algorithm performed best in the case where the number of initialized classes matches the actual number of classes. In the case with three initialized classes, K-Means takes the classes 1 and 3 to be one, probably because they are closest together. In the last case, the algorithm splits class 2 in half, seemingly since it is spread the most (see covariance matrices).
-	
+	Now the K-means algorithm is applied to $Train$ with different initial parameters. First, only the number of initialized classes was varied. 
 	\begin{figure}[H]
-	\begin{center}
-		\begin{minipage}[t]{0.4\textwidth}
-			\includegraphics[width=\textwidth]{Task3_classes3_png}
-		\end{minipage}
-		\begin{minipage}[t]{0.4\textwidth}
-			\includegraphics[width=\textwidth]{Task3_classes4_png}
-		\end{minipage}
-		\begin{minipage}[b]{0.4\textwidth}
-		\includegraphics[width=\textwidth]{Task3_classes5_png}
-		\end{minipage}
-	\end{center}
-	\end{figure}
+		\begin{center}
+			\begin{minipage}[t]{0.35\textwidth}
+				\includegraphics[width=\textwidth]{Task3_classes3_png}
+			\end{minipage}
+			\begin{minipage}[t]{0.35\textwidth}
+				\includegraphics[width=\textwidth]{Task3_classes4_png}
+			\end{minipage}
+			\begin{minipage}[b]{0.35\textwidth}
+				\includegraphics[width=\textwidth]{Task3_classes5_png}
+			\end{minipage}
+		\end{center}
+	\end{figure}	
+
+	Obviously, the algorithm performed best in the case where the number of initialized classes matches the actual number of classes. In the case with three initialized classes, K-Means takes the classes 1 and 3 to be one, probably because they are closest together. In the last case, the algorithm splits class 2 in half, seemingly since it is spread the most (see covariance matrices).
+
 
 	Furthermore, the algorithm was run two more times, with the correct number of classes initialized. Once, with the means initialized in the following way:
-
 	\begin{align*}
 		\mu_1 = [-2,-2]^T, \quad \mu_2 = [-2.1,-2.1]^T, \quad \mu_3 = [-2,-2.2]^T, \quad \mu_4 = [-2.1,-2.2]^T
 	\end{align*}
@@ -266,5 +263,8 @@
 
 	This shows that even when the number of classes is initialized correctly, the results depend highly on the initial means. On the other hand, it is interesting that K-means can sometimes handle one mean to be initialized completely wrong. However, in some runs of the algorithm (with different random means and the same fourth mean $\mu_4 = [30,30]^T$), it didn't converge correctly, supporting the statement that the results are highly dependent on the initial conditions.
 	
+\includepdf[pages=-]{Maximum_Likelihood}
+\includepdf[pages=-]{Expectation_Maximization}
+\includepdf[pages=-]{Classification}
 	
 \end{document}
