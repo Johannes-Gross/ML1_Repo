@@ -17,7 +17,7 @@ DEFAULTS_EXP = {'uruguay': ('uruguay', 8, 10000, 1000, 500, bubble,
                         ExponentialDecay(89*8/10, 0.995)),
             'rgbg_beergardens': ('rgbg_beergardens', 8, 800, 50, 50, gaussian,
                         ExponentialDecay(0.7, 0.999),
-                        ExponentialDecay(30*8/10, 0.995))}
+                        ExponentialDecay(21*8/10, 0.990))}
 
 DEFAULTS_LIN = {'uruguay': ('uruguay', 8, 10000, 1000, 500, gaussian,
                         LinearDecay(0.9, 0.000089),
@@ -74,7 +74,7 @@ def plot_map(cities, neurons, iteration):
     plt.gca().invert_xaxis()
     plt.gca().set_aspect('equal', adjustable='datalim')
 
-    plt.title('Iteration #{:06d}'.format(iteration))
+    plt.title('Iteration #{:03d}'.format(iteration))
     plt.axis('off')
     plt.savefig('../results/{}.png'.format(iteration))
     plt.clf()
@@ -111,9 +111,9 @@ def get_input():
     :return radius: radius of neurons to be used
     """
     data_sets = {'w': 'western_sahara', 'q': 'qatar', 'u': 'uruguay',
-                 'd': 'djibouti', 'b': 'rgbg_beergardens'}
+                 'd': 'djibouti', 'beer': 'rgbg_beergardens'}
 
-    set_id = input('Data set [w/q/u/d/b]: ') or 'b'
+    set_id = input('Data set [w/q/u/d/beer]: ') or 'beer'
     data_set = data_sets[set_id]
 
     if not os.path.isfile('../assets/{}.txt'.format(data_set)):

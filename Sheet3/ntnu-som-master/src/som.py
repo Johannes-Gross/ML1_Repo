@@ -26,8 +26,8 @@ def init_neurons(count):
     :param count: number of neurons to initialize
     :return: list of neurons as weight vectors (x,y)
     """
-    return [[random.uniform(0.0, 1.0),
-             random.uniform(0.0, 1.0)] for i in range(count)]
+    return [[random.uniform(0.9995, 1.0),
+             random.uniform(0.2466, 0.24696)] for i in range(count)]
 
 
 def som(neurons, cities, iterations, k, plot_k, neighborhood, learning_rate,
